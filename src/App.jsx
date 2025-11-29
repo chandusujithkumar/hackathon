@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Analytics } from "@vercel/analytics/react"; // <-- Added for Vercel Analytics
 import "./App.css";
 
 const App = () => {
@@ -53,8 +54,11 @@ const App = () => {
             />
             <button type="submit">Login</button>
           </form>
-          <p className="login-footer">Don't have an account? <a href="#">Sign Up</a></p>
+          <p className="login-footer">
+            Don't have an account? <a href="#">Sign Up</a>
+          </p>
         </div>
+        <Analytics /> {/* Analytics will track page views on login page */}
       </div>
     );
   }
@@ -69,7 +73,9 @@ const App = () => {
           <a href="#attractions">Attractions</a>
           <a href="#guides">Guides</a>
         </nav>
-        <button className="logout-btn" onClick={handleLogout}>Logout</button>
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
       </header>
 
       {/* Hero Section */}
@@ -86,7 +92,10 @@ const App = () => {
         <h2>Popular Homestays</h2>
         <div className="card-container">
           <div className="card">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80" alt="Hillside Haven" />
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80"
+              alt="Hillside Haven"
+            />
             <h3>Hillside Haven</h3>
             <p>Experience peaceful mountain views with free breakfast.</p>
             <p>💰 ₹3,499/night</p>
@@ -94,7 +103,10 @@ const App = () => {
             <button>Book Now</button>
           </div>
           <div className="card">
-            <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=400&q=80" alt="Beach Retreat" />
+            <img
+              src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=400&q=80"
+              alt="Beach Retreat"
+            />
             <h3>Beach Retreat</h3>
             <p>Relax near the shore with private balcony and ocean view.</p>
             <p>💰 ₹4,299/night</p>
@@ -102,7 +114,10 @@ const App = () => {
             <button>Book Now</button>
           </div>
           <div className="card">
-            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=400&q=80" alt="Urban Comfort" />
+            <img
+              src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=400&q=80"
+              alt="Urban Comfort"
+            />
             <h3>Urban Comfort</h3>
             <p>Modern stay in the heart of the city with all amenities.</p>
             <p>💰 ₹2,899/night</p>
@@ -112,7 +127,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* Attractions */}
+      {/* Attractions Section */}
       <section id="attractions" className="attractions">
         <h2>Top Attractions</h2>
         <div className="card-container">
@@ -126,7 +141,10 @@ const App = () => {
             <button>View More</button>
           </div>
           <div className="card">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Sunny Beach" />
+            <img
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80"
+              alt="Sunny Beach"
+            />
             <h3>Sunny Beach</h3>
             <p>Perfect spot for sunbathing and water sports.</p>
             <button>View More</button>
@@ -143,33 +161,34 @@ const App = () => {
         </div>
       </section>
 
-     {/* Local Guides */}
-<section id="guides" className="guides">
-  <h2>Meet Our Local Guides</h2>
-  <div className="card-container">
-    <div className="card">
-      <h3>Arjun</h3>
-      <p>🏞️ Trekking & mountain climbing expert</p>
-      <button>Contact</button>
-    </div>
-    <div className="card">
-      <h3>Priya</h3>
-      <p>🏖️ Coastal tours & cultural exploration</p>
-      <button>Contact</button>
-    </div>
-    <div className="card">
-      <h3>Ravi</h3>
-      <p>🏙️ City history & food tour specialist</p>
-      <button>Contact</button>
-    </div>
-  </div>
-</section>
-
+      {/* Local Guides Section */}
+      <section id="guides" className="guides">
+        <h2>Meet Our Local Guides</h2>
+        <div className="card-container">
+          <div className="card">
+            <h3>Arjun</h3>
+            <p>🏞️ Trekking & mountain climbing expert</p>
+            <button>Contact</button>
+          </div>
+          <div className="card">
+            <h3>Priya</h3>
+            <p>🏖️ Coastal tours & cultural exploration</p>
+            <button>Contact</button>
+          </div>
+          <div className="card">
+            <h3>Ravi</h3>
+            <p>🏙️ City history & food tour specialist</p>
+            <button>Contact</button>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="footer">
         <p>© 2025 TravelStay+. All rights reserved.</p>
       </footer>
+
+      <Analytics /> {/* <-- Analytics also included on logged-in homepage */}
     </div>
   );
 };
