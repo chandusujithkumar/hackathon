@@ -1,9 +1,54 @@
 import React, { useState, useEffect } from "react";
-import { Analytics } from "@vercel/analytics/react"; // <-- Added for Vercel Analytics
+import { Analytics } from "@vercel/analytics/react"; // Vercel Analytics
 import "./App.css";
+
+// SignUp Component
+const SignUp = ({ onSignUp, onCancel }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    alert(`Account created for ${username}!`);
+    onSignUp(username, password); // log them in
+  };
+
+  return (
+    <div className="login-page">
+      <div className="login-card">
+        <h1>Sign Up</h1>
+        <form className="login-form" onSubmit={handleSignUp}>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Create Account</button>
+        </form>
+        <p className="login-footer">
+          Already have an account?{" "}
+          <a href="#" onClick={onCancel}>
+            Login
+          </a>
+        </p>
+      </div>
+      <Analytics /> {/* Track page views on Sign Up */}
+    </div>
+  );
+};
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,6 +76,23 @@ const App = () => {
     setPassword("");
   };
 
+  const handleSignUpLogin = (newUsername, newPassword) => {
+    // After sign-up, log them in automatically
+    setUsername(newUsername);
+    setPassword(newPassword);
+    setIsLoggedIn(true);
+    setShowSignUp(false);
+  };
+
+  if (showSignUp) {
+    return (
+      <SignUp
+        onSignUp={handleSignUpLogin}
+        onCancel={() => setShowSignUp(false)}
+      />
+    );
+  }
+
   if (!isLoggedIn) {
     return (
       <div className="login-page">
@@ -55,10 +117,13 @@ const App = () => {
             <button type="submit">Login</button>
           </form>
           <p className="login-footer">
-            Don't have an account? <a href="#">Sign Up</a>
+            Don't have an account?{" "}
+            <a href="#" onClick={() => setShowSignUp(true)}>
+              Sign Up
+            </a>
           </p>
         </div>
-        <Analytics /> {/* Analytics will track page views on login page */}
+        <Analytics /> {/* Track page views on login page */}
       </div>
     );
   }
@@ -188,7 +253,7 @@ const App = () => {
         <p>© 2025 TravelStay+. All rights reserved.</p>
       </footer>
 
-      <Analytics /> {/* <-- Analytics also included on logged-in homepage */}
+      <Analytics /> {/* Track page views on homepage */}
     </div>
   );
 };
